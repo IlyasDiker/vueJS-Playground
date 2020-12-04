@@ -4,14 +4,30 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Vue Playground</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
         <main id="app">
-            <h1>{{ title }}</h1>
+            <v-app>
+                <h1>{{ title }}</h1>
+                <form @submit.prevent="addTodo">
+                    <label for="newTodo">New Task</label>
+                    <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="">
+                    <button type="submit" name="button">Add</button>
+                </form>
+                <ul>
+                    <li v-for="task in tasks">
+                        <h3>{{task.title}}</h3>
+                    </li>
+                </ul>
+            </v-app>
         </main>
         
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
         <script src="app.js"></script>
     </body>
 </html>
