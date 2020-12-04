@@ -8,6 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
         <style>
             .done{
                 text-decoration: line-through;
@@ -17,23 +18,35 @@
     <body>
         <main id="app">
             <v-app>
-                <h1>{{ title }}</h1>
-                <form @submit.prevent="addTodo">
-                    <label for="newTodo">New Task</label>
-                    <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="" required>
-                    <button type="submit" name="button">Add</button>
-                </form>
-                <button @click="alldone" type="button">Mark all as Done</button>
-                <ul>
-                    <li v-for="task in tasks">
-                        <input type="checkbox" v-model="task.done">
-                        <h3 :class="{ done : task.done }">{{task.title}}</h3>
-                        <button @click="removetodo(task)" type="button">Remove</button>
-                    </li>
-                </ul>
+                <v-container>
+                    <h1>{{ title }}</h1>
+                    <v-form @submit.prevent="addTodo">
+                        <v-text-field v-model="newTodo" type="text" name="newTodo" id="newTodo" label="Add New Task" :rules="rules.required" required clearable></v-text-field>
+                        <v-row justify="space-between">
+                            <v-btn type="submit" color="primary" @click="conditions = false">Add</v-btn>
+                            <v-btn @click="alldone" type="button">
+                                <v-icon>library_add_check</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </v-form>
+                    <ul>
+                        <li v-for="task in tasks">
+                            <v-hover>
+                                <v-row 
+                                align="center"
+                                justify="space-between">
+                                    <v-checkbox type="checkbox" v-model="task.done"></v-checkbox>
+                                    <span :class="{ done : task.done }">{{task.title}}</span>
+                                    <v-btn @click="removetodo(task)" type="button" color="error">
+                                        <v-icon>delete_sweep</v-icon>
+                                    </v-btn>
+                                </v-row>
+                            </v-hover>
+                        </li>
+                    </ul>
+                </v-container>
             </v-app>
         </main>
-        
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
         <script src="app.js"></script>

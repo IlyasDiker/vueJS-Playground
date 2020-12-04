@@ -2,10 +2,14 @@ const app = new Vue({
     el: '#app',
     vuetify: new Vuetify(),
     data : {
-        title: 'Hello World',
+        title: 'Todo App',
         newTodo :'',
         tasks : [],
+        rules: {
+            required: [val => (val || '').length > 0 || 'This field is required'],
+        },
     },
+    
     methods: {
         addTodo() {
             this.tasks.push({
