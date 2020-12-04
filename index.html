@@ -8,6 +8,11 @@
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <style>
+            .done{
+                text-decoration: line-through;
+            }
+        </style>
     </head>
     <body>
         <main id="app">
@@ -15,12 +20,15 @@
                 <h1>{{ title }}</h1>
                 <form @submit.prevent="addTodo">
                     <label for="newTodo">New Task</label>
-                    <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="">
+                    <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="" required>
                     <button type="submit" name="button">Add</button>
                 </form>
+                <button @click="alldone" type="button">Mark all as Done</button>
                 <ul>
                     <li v-for="task in tasks">
-                        <h3>{{task.title}}</h3>
+                        <input type="checkbox" v-model="task.done">
+                        <h3 :class="{ done : task.done }">{{task.title}}</h3>
+                        <button @click="removetodo(task)" type="button">Remove</button>
                     </li>
                 </ul>
             </v-app>

@@ -11,7 +11,17 @@ const app = new Vue({
             this.tasks.push({
                 title: this.newTodo,
                 done: false,
-            })
+            });
+            this.newTodo =''
+        },
+        removetodo(task) {
+            const taskindex = this.tasks.indexOf(task);
+            this.tasks.splice(taskindex, 1);
+        },
+        alldone() {
+            this.tasks.forEach(task => {
+                task.done = true;
+            });
         }
     }
 })
